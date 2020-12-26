@@ -1,0 +1,2 @@
+ci:
+	yarn test:unit

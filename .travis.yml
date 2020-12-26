@@ -1,0 +1,14 @@
+jobs:
+    include:
+        - language: php
+          php: '7.3'
+          script:
+          - cd symfony
+          - composer install
+          - make ci
+        - language: node_js
+          node_js: 10
+          script:
+          - cd vue
+          - yarn install
+          - make ci
