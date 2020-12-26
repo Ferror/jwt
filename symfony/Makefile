@@ -1,2 +1,2 @@
 ci:
-	vendor/bin/ecs check src
+	vendor/bin/ecs check
