@@ -1,1 +1,1 @@
-# jwt
+# Symfony + Vue = ❤️
