@@ -2136,6 +2136,11 @@ assign-symbols@^1.0.0:
   resolved "https://registry.yarnpkg.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
   integrity sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c=
 
+ast-types@0.11.5:
+  version "0.11.5"
+  resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.11.5.tgz#9890825d660c03c28339f315e9fa0a360e31ec28"
+  integrity sha512-oJjo+5e7/vEc2FBK8gUalV0pba4L3VdBIs2EKhOLHLcOd2FgQIVQN9xb0eZ9IjEWyAL7vq6fGJxOvVvdCHNyMw==
+
 astral-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
@@ -4192,7 +4197,7 @@ espree@^6.1.2, espree@^6.2.1:
     acorn-jsx "^5.2.0"
     eslint-visitor-keys "^1.1.0"
 
-esprima@^4.0.0, esprima@^4.0.1:
+esprima@^4.0.0, esprima@^4.0.1, esprima@~4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
   integrity sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==
@@ -8035,6 +8040,11 @@ pretty@2.0.0:
     extend-shallow "^2.0.1"
     js-beautify "^1.6.12"
 
+private@~0.1.5:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
+  integrity sha512-VvivMrbvd2nKkiG38qjULzlc+4Vx4wm/whI9pQD35YrARNnhxeiRktSOhSukRLFNlzg6Br/cJPet5J/u19r/mg==
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -8287,6 +8297,16 @@ realpath-native@^1.1.0:
   integrity sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
   dependencies:
     util.promisify "^1.0.0"
+
+recast@^0.15.2:
+  version "0.15.5"
+  resolved "https://registry.yarnpkg.com/recast/-/recast-0.15.5.tgz#6871177ee26720be80d7624e4283d5c855a5cb0b"
+  integrity sha512-nkAYNqarh73cMWRKFiPQ8I9dOLFvFk6SnG8u/LUlOYfArDOD/EjsVRAs860TlBLrpxqAXHGET/AUAVjdEymL5w==
+  dependencies:
+    ast-types "0.11.5"
+    esprima "~4.0.0"
+    private "~0.1.5"
+    source-map "~0.6.1"
 
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"
@@ -9850,6 +9870,13 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
+
+vue-cli-plugin-store@~0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/vue-cli-plugin-store/-/vue-cli-plugin-store-0.0.7.tgz#95738a35e2d016759a077100147b26fbd6c7cf57"
+  integrity sha512-cIGMq9Z5SXzbrbwW7KPYBBOb+wOnGI9/ynb78CcZzkacYDxRvUsNF5m6Q76MclLBNGk/N4+fHJh4P1xfwdGidw==
+  dependencies:
+    recast "^0.15.2"
 
 vue-eslint-parser@^7.3.0:
   version "7.3.0"
