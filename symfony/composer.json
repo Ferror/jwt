@@ -7,13 +7,18 @@
         "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
         "symfony/console": "^5.2",
         "symfony/dotenv": "^5.2",
         "symfony/flex": "^1.11",
         "symfony/framework-bundle": "^5.2",
+        "symfony/uid": "^5.2",
         "symfony/yaml": "^5.2"
     },
     "require-dev": {
+        "symfony/browser-kit": "^5.2",
+        "symfony/phpunit-bridge": "^5.2",
         "symplify/easy-coding-standard": "^9.0"
     },
     "config": {
