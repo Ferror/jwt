@@ -3,10 +3,19 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Json;
 
-final class Decoder
+use App\Application\Decoder as DecoderDecorator;
+
+final class Decoder implements DecoderDecorator
 {
-    public function decode(string $json)
+    private $decoder;
+
+    public function __construct(DecoderDecorator $decoder)
     {
-        return json_decode($json, true);
+        $this->decoder = $decoder;
+    }
+
+    public function decode($data)
+    {
+        return json_decode($this->decoder->decode($data), true);
     }
 }

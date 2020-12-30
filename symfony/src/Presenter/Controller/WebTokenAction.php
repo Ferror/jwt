@@ -19,15 +19,17 @@ final class WebTokenAction extends AbstractController
      */
     public function __invoke(): Response
     {
-        $json = new Encoder();
-        $base = new \App\Infrastructure\Base64\Encoder();
+//        $json = new Encoder();
+//        $base = new \App\Infrastructure\Base64\Encoder();
+//
+//        $storage = new TokenStorage();
+//        $token = $storage->get();
+//
+//        $jsonEncoded = $json->encode(new WebToken($token['created_at'], Uuid::fromString($token['uuid'])));
+//        $baseDecoded = $base->encode($jsonEncoded);
+//
+//        return new JsonResponse(hash_hmac('SHA512', $baseDecoded, 'secret'));
 
-        $storage = new TokenStorage();
-        $token = $storage->get();
-
-        $jsonEncoded = $json->encode(new WebToken($token['created_at'], Uuid::fromString($token['uuid'])));
-        $baseDecoded = $base->encode($jsonEncoded);
-
-        return new JsonResponse(hash_hmac('SHA512', $baseDecoded, 'secret'));
+        return new Response();
     }
 }

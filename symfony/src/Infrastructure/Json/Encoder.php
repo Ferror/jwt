@@ -3,10 +3,19 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Json;
 
-final class Encoder
+use App\Application\Encoder as EncoderDecorator;
+
+final class Encoder implements EncoderDecorator
 {
-    public function encode(\JsonSerializable $json): string
+    private $encoder;
+
+    public function __construct(EncoderDecorator $encoder)
     {
-        return json_encode($json->jsonSerialize());
+        $this->encoder = $encoder;
+    }
+
+    public function encode($data)
+    {
+        return json_encode($this->encoder->encode($data));
     }
 }

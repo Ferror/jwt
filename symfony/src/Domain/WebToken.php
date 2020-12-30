@@ -3,25 +3,26 @@ declare(strict_types=1);
 
 namespace App\Domain;
 
-use Symfony\Component\Uid\Uuid;
+use App\Application\Encoder;
+use App\Domain\WebToken\WebTokenHeader;
+use App\Domain\WebToken\WebTokenPayload;
+use App\Domain\WebToken\WebTokenSignature;
 
-final class WebToken implements \JsonSerializable
+final class WebToken
 {
-    private $createdAt;
-    private $identifier;
+    private $header;
+    private $payload;
+    private $signature;
 
-    public function __construct(int $createdAt, Uuid $identifier)
+    public function __construct(WebTokenHeader $header, WebTokenPayload $payload, WebTokenSignature $signature)
     {
-        $this->createdAt = $createdAt;
-        $this->identifier = $identifier;
+        $this->header = $header;
+        $this->payload = $payload;
+        $this->signature = $signature;
     }
 
-    public function jsonSerialize(): array
+    public function serialize(Encoder $encoder): string
     {
-        return [
-            'created_at' => $this->createdAt,
-            'expires_at' => $this->createdAt + 3600,
-            'identifier' => $this->identifier->jsonSerialize(),
-        ];
+        return sprintf('%s.%s.%s', $encoder->encode($this->header), $this->payload, $this->signature);
     }
 }

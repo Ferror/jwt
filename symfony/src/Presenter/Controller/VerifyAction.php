@@ -28,6 +28,7 @@ final class VerifyAction
         $jsonEncoded = $json->encode(new WebToken($token['created_at'], Uuid::fromString($token['uuid'])));
         $baseDecoded = $base->encode($jsonEncoded);
 
+        //przy JWT hash_hmac nie jest potrzebny?
         return new JsonResponse(
             hash_hmac('SHA512', $baseDecoded, 'secret') === $request->get('token')
         );

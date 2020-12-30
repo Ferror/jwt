@@ -3,10 +3,19 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Base64;
 
-final class Decoder
+use App\Application\Decoder as DecoderDecorator;
+
+final class Decoder implements DecoderDecorator
 {
-    public function decode(string $code)
+    private $decoder;
+
+    public function __construct(DecoderDecorator $decoder)
     {
-        return base64_decode($code, true);
+        $this->decoder = $decoder;
+    }
+
+    public function decode($data)
+    {
+        return base64_decode($this->decoder->decode($data), true);
     }
 }

@@ -5,5 +5,5 @@ namespace App\Application;
 
 interface Encoder
 {
-    public function encode();
+    public function encode($data);
 }
