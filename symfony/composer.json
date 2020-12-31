@@ -7,7 +7,6 @@
         "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "ext-intl": "*",
         "ext-json": "*",
         "ext-openssl": "*",
         "symfony/console": "^5.2",
@@ -20,6 +19,7 @@
     "require-dev": {
         "symfony/browser-kit": "^5.2",
         "symfony/phpunit-bridge": "^5.2",
+        "symfony/var-dumper": "^5.2",
         "symplify/easy-coding-standard": "^9.0"
     },
     "config": {
