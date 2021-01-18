@@ -1,8 +1,8 @@
 <template>
-    <div class="AuthenticationStatus" v-if="isLogged">
+    <div class="AuthenticationStatus AuthenticationStatus__active" v-if="isLogged">
         <h1>Authenticated</h1>
     </div>
-    <div class="AuthenticationStatus AuthenticationStatus__active" v-else>
+    <div class="AuthenticationStatus" v-else>
         <h1>Not authenticated 😢</h1>
     </div>
 </template>

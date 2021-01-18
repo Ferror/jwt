@@ -10,7 +10,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import AuthenticationClient from "@/clients/AuthenticationClient";
 
 export default {
-    name: 'Home',
+    name: "Home",
     components: {
         HelloWorld
     },

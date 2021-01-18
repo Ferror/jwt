@@ -1,12 +1,24 @@
 <template>
-    <form action="">
+    <form
+        action=""
+        method="post"
+        @submit="createWebToken"
+    >
         <div>
             <label>Email Address</label>
-            <input type="text">
+            <input
+                type="email"
+                required
+                v-model="email"
+            >
         </div>
         <div>
             <label>Password</label>
-            <input type="password">
+            <input
+                type="password"
+                required
+                v-model="password"
+            >
         </div>
         <div>
             <input type="submit">
@@ -15,8 +27,26 @@
 </template>
 
 <script>
+import AuthenticationClient from "@/clients/AuthenticationClient";
+
 export default {
-    name: "SignInForm"
+    name: "SignInForm",
+    data: function () {
+        return {
+            email: '',
+            password: '',
+        }
+    },
+    methods: {
+        createWebToken: function (event) {
+            event.preventDefault();
+
+            console.log(this.email);
+            console.log(this.password);
+
+            AuthenticationClient.createToken(this.email, this.password);
+        }
+    }
 }
 </script>
 
