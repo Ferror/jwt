@@ -16,6 +16,6 @@ final class Encoder implements EncoderDecorator
 
     public function encode($data)
     {
-        return json_encode($this->encoder->encode($data));
+        return $this->encoder->encode(json_encode($data));
     }
 }

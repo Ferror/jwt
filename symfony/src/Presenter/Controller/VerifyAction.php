@@ -19,18 +19,19 @@ final class VerifyAction
      */
     public function __invoke(Request $request): Response
     {
-        $json = new Encoder();
-        $base = new \App\Infrastructure\Base64\Encoder();
-
-        $storage = new TokenStorage();
-        $token = $storage->get();
-
-        $jsonEncoded = $json->encode(new WebToken($token['created_at'], Uuid::fromString($token['uuid'])));
-        $baseDecoded = $base->encode($jsonEncoded);
-
-        //przy JWT hash_hmac nie jest potrzebny?
-        return new JsonResponse(
-            hash_hmac('SHA512', $baseDecoded, 'secret') === $request->get('token')
-        );
+//        $json = new Encoder();
+//        $base = new \App\Infrastructure\Base64\Encoder();
+//
+//        $storage = new TokenStorage();
+//        $token = $storage->get();
+//
+//        $jsonEncoded = $json->encode(new WebToken($token['created_at'], Uuid::fromString($token['uuid'])));
+//        $baseDecoded = $base->encode($jsonEncoded);
+//
+//        //przy JWT hash_hmac nie jest potrzebny?
+//        return new JsonResponse(
+//            hash_hmac('SHA512', $baseDecoded, 'secret') === $request->get('token')
+//        );
+        return new Response();
     }
 }
