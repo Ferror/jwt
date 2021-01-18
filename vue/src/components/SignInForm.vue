@@ -8,6 +8,9 @@
             <label>Password</label>
             <input type="password">
         </div>
+        <div>
+            <input type="submit">
+        </div>
     </form>
 </template>
 
@@ -18,5 +21,15 @@ export default {
 </script>
 
 <style scoped>
+form > div {
+    padding: 10px;
+    margin: 0 auto;
+}
 
+label, input {
+    width: 350px;
+    display: block;
+    margin: 0 auto;
+    padding: 7px;
+}
 </style>
