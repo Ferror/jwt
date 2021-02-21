@@ -3,16 +3,14 @@ declare(strict_types=1);
 
 namespace App\Presenter\Controller;
 
-use App\Domain\WebToken;
-use App\Infrastructure\Json\Encoder;
+use App\Infrastructure\Json\Encoder as JsonEncoder;
+use App\Infrastructure\Base64\Encoder as Base64Encoder;
 use App\Infrastructure\Memory\MemoryEncoder;
-use App\Infrastructure\Memory\TokenStorage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Uid\Uuid;
 
 final class WebTokenAction extends AbstractController
 {
@@ -21,38 +19,30 @@ final class WebTokenAction extends AbstractController
      */
     public function __invoke(Request $request): Response
     {
-        $login = $request->get('login');
-        $password = $request->get('password');
-
-        var_dump($login, $password);
-
         $header = [
             'alg' => 'SHA512',
         ];
         $payload = [
             'user' => 123,
+            'expires_at' => '2021-03-01 12:10:20',
         ];
-        $signature = hash_hmac('SHA512', json_encode($header) . json_encode($payload), 'secret');
-//        $json = new Encoder();
-//        $base = new \App\Infrastructure\Base64\Encoder();
-//
-//        $storage = new TokenStorage();
-//        $token = $storage->get();
-//
-//        $jsonEncoded = $json->encode(new WebToken($token['created_at'], Uuid::fromString($token['uuid'])));
-//        $baseDecoded = $base->encode($jsonEncoded);
-//
-//        return new JsonResponse(hash_hmac('SHA512', $baseDecoded, 'secret'));
+        $signature = hash_hmac($header['alg'], json_encode($header) . json_encode($payload), 'secret');
 
-        return new Response(
-            $this->encode($header) . '.' . $this->encode($payload) . '.' . $signature,
+        return new JsonResponse(
+            [
+                'token' => $this->encode($header) . '.' . $this->encode($payload) . '.' . $signature,
+                'debug' => [
+                    'login' => $request->get('login'),
+                    'password' => $request->get('password'),
+                ]
+            ],
             200
         );
     }
 
     private function encode($data): string
     {
-        $encoder = new Encoder(new \App\Infrastructure\Base64\Encoder(new MemoryEncoder()));
+        $encoder = new JsonEncoder(new Base64Encoder(new MemoryEncoder()));
 
         return $encoder->encode($data);
     }

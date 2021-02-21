@@ -23,6 +23,6 @@ final class WebToken
 
     public function serialize(Encoder $encoder): string
     {
-        return sprintf('%s.%s.%s', $encoder->encode($this->header), $this->payload, $this->signature);
+        return sprintf('%s.%s.%s', $encoder->encode($this->header), $encoder->encode($this->payload), $this->signature);
     }
 }

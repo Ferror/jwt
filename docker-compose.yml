@@ -1,7 +1,6 @@
 services:
     traefik:
         image: traefik:2.3
-        container_name: "traefik"
         command:
             - "--log.level=DEBUG"
             - "--api.insecure=true"
@@ -18,7 +17,6 @@ services:
                 ipv4_address: 192.168.10.2
 
     symfony:
-        container_name: "symfony"
         image: ferror/symfony-image
         command: ["make", "run"]
         labels:
@@ -26,11 +24,12 @@ services:
             - "traefik.http.routers.symfony.rule=Host(`symfony.malcherczyk.localhost`)"
         volumes:
             - ./symfony/:/app:delegated
+        depends_on:
+            - traefik
         networks:
             - ferror
 
     vue:
-        container_name: "vue"
         image: ferror/vue-image
         command: ["make", "run"]
         labels:
@@ -39,6 +38,8 @@ services:
         volumes:
             - ./vue/:/app:delegated
             - ./app/node_modules
+        depends_on:
+            - traefik
         networks:
             - ferror
 
