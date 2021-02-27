@@ -14,5 +14,7 @@ final class VerifyActionTest extends WebTestCase
         $client = self::createClient();
 
         $client->request('GET', '/verify', ['token' => self::TOKEN]);
+
+        self::assertEquals(200, $client->getResponse()->getStatusCode());
     }
 }
