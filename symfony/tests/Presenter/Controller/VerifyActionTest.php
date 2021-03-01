@@ -1,0 +1,20 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Presenter\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+final class VerifyActionTest extends WebTestCase
+{
+    private const TOKEN = 'eyJhbGciOiJTSEE1MTIifQ==.eyJ1c2VyIjoxMjMsImV4cGlyZXNfYXQiOiIyMDIxLTAzLTAxIDEyOjEwOjIwIn0=.9dd1f5d98753c955bab229eaa5c363bd36e5cc2988a6b537122bd9d6bddf589bd19deadd0981d41ab823ccef1c1a23e8e1923b998acb85e4b9104e7b37dd6acf';
+
+    public function testItVerifiesToken(): void
+    {
+        $client = self::createClient();
+
+        $client->request('GET', '/verify', ['token' => self::TOKEN]);
+
+        self::assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+}
