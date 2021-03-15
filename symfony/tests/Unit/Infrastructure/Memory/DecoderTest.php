@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Infrastructure\Memory;
+namespace App\Unit\Infrastructure\Memory;
 
+use App\Infrastructure\Memory\MemoryDecoder;
 use PHPUnit\Framework\TestCase;
 
 final class DecoderTest extends TestCase

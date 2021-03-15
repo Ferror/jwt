@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Infrastructure\Json;
+namespace App\Unit\Infrastructure\Json;
 
+use App\Infrastructure\Json\Encoder;
 use App\Infrastructure\Memory\MemoryEncoder;
 use PHPUnit\Framework\TestCase;
 

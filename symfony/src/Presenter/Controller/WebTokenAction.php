@@ -24,7 +24,7 @@ final class WebTokenAction extends AbstractController
         ];
         $payload = [
             'user' => 123,
-            'expires_at' => '2021-03-01 12:10:20',
+            'expires_at' => '2021-03-01 12:10:20', //timestamp better
         ];
         $signature = hash_hmac($header['alg'], json_encode($header) . json_encode($payload), 'secret');
 

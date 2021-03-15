@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Infrastructure\Base64;
+namespace App\Unit\Infrastructure\Base64;
 
+use App\Infrastructure\Base64\Decoder;
 use App\Infrastructure\Memory\MemoryDecoder;
 use PHPUnit\Framework\TestCase;
 

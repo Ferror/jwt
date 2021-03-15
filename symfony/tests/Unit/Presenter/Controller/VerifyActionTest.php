@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Presenter\Controller;
+namespace App\Unit\Presenter\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

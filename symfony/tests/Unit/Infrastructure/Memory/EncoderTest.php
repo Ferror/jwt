@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Infrastructure\Memory;
+namespace App\Unit\Infrastructure\Memory;
 
+use App\Infrastructure\Memory\MemoryEncoder;
 use PHPUnit\Framework\TestCase;
 
 final class EncoderTest extends TestCase

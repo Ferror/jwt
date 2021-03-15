@@ -1,4 +1,5 @@
 ci:
+	composer validate
 	vendor/bin/ecs check
 	bin/phpunit tests
 run:

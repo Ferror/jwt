@@ -1,4 +1,6 @@
 {
+    "name": "ferror/jwt",
+    "description": "",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",
