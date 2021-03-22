@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Presenter\Controller;
 
+use App\Domain\Clock;
 use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,7 @@ final class VerifyAction
     /**
      * @Route("/verify")
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, Clock $clock): Response
     {
         $token = $request->get('token');
         $exploded = explode('.', $token);
@@ -35,7 +36,7 @@ final class VerifyAction
         $requestSignature = hash_hmac($jsonHeader['alg'] /* SHA512 */, $baseHeader . $basePayload, 'secret');
 
         if ($signature === $requestSignature) {
-            if (DateTime::createFromFormat('Y-m-d H:i:s', $jsonPayload['expires_at']) < new DateTime()) {
+            if (DateTime::createFromFormat('Y-m-d H:i:s', $jsonPayload['expires_at'])->getTimestamp() < $clock->getTime()) {
                 return new Response('Token expired', 400);
             }
 
