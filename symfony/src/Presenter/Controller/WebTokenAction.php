@@ -15,29 +15,29 @@ use Symfony\Component\Routing\Annotation\Route;
 final class WebTokenAction extends AbstractController
 {
     /**
-     * @Route("/authentication")
+     * @Route("/authentication", methods={"POST"})
      */
     public function __invoke(Request $request): Response
     {
-        $header = [
-            'alg' => 'SHA512',
-        ];
-        $payload = [
-            'user' => 123,
-            'expires_at' => '2021-03-01 12:10:20', //timestamp better
-        ];
-        $signature = hash_hmac($header['alg'], json_encode($header) . json_encode($payload), 'secret');
+        if ($this->isValid($request->get('login', ''), ($request->get('password', '')))) {
+            $header = [
+                'alg' => 'SHA512',
+            ];
+            $payload = [
+                'user' => 123,
+                'expires_at' => 1616600000, //timestamp better
+            ];
+            $signature = hash_hmac($header['alg'], json_encode($header) . json_encode($payload), 'secret');
 
-        return new JsonResponse(
-            [
-                'token' => $this->encode($header) . '.' . $this->encode($payload) . '.' . $signature,
-                'debug' => [
-                    'login' => $request->get('login'),
-                    'password' => $request->get('password'),
-                ]
-            ],
-            200
-        );
+            return new JsonResponse(
+                [
+                    'token' => $this->encode($header) . '.' . $this->encode($payload) . '.' . $signature,
+                ],
+                200
+            );
+        }
+
+        return new JsonResponse(['error' => ['message' => 'Could not authenticate']], 403);
     }
 
     private function encode($data): string
@@ -45,5 +45,10 @@ final class WebTokenAction extends AbstractController
         $encoder = new JsonEncoder(new Base64Encoder(new MemoryEncoder()));
 
         return $encoder->encode($data);
+    }
+
+    private function isValid(string $login, string $password): bool
+    {
+        return $login === 'login' && $password === 'password';
     }
 }

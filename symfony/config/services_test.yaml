@@ -8,4 +8,4 @@ parameters:
 services:
     App\Domain\Clock:
         class: App\Infrastructure\Memory\MemoryClock
-        arguments: [1200000]
+        arguments: [1616500000]

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class VerifyAction
 {
     /**
-     * @Route("/verify")
+     * @Route("/verify", methods={"POST"})
      */
     public function __invoke(Request $request, Clock $clock): Response
     {
@@ -36,7 +36,7 @@ final class VerifyAction
         $requestSignature = hash_hmac($jsonHeader['alg'] /* SHA512 */, $baseHeader . $basePayload, 'secret');
 
         if ($signature === $requestSignature) {
-            if (DateTime::createFromFormat('Y-m-d H:i:s', $jsonPayload['expires_at'])->getTimestamp() < $clock->getTime()) {
+            if ($jsonPayload['expires_at'] < $clock->getTime()) {
                 return new Response('Token expired', 400);
             }
 

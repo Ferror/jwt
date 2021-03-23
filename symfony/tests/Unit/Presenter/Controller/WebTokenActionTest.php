@@ -7,18 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class WebTokenActionTest extends WebTestCase
 {
-    private const TOKEN = 'eyJhbGciOiJTSEE1MTIifQ==.eyJ1c2VyIjoxMjMsImV4cGlyZXNfYXQiOiIyMDIxLTAzLTAxIDEyOjEwOjIwIn0=.9dd1f5d98753c955bab229eaa5c363bd36e5cc2988a6b537122bd9d6bddf589bd19deadd0981d41ab823ccef1c1a23e8e1923b998acb85e4b9104e7b37dd6acf';
+    private const TOKEN = 'eyJhbGciOiJTSEE1MTIifQ==.eyJ1c2VyIjoxMjMsImV4cGlyZXNfYXQiOjE2MTY2MDAwMDB9.956e8e557ed84f93f90a5865586d38010d8e22e974384f3d5fee0764e0bb6ba9c5ef86432bcf4d1d5c26e058d26aa42fc1e10de884a62bedaa6269c706877d36';
 
     public function testItCreatesWebToken(): void
     {
         $client = self::createClient();
 
-        $client->request('GET', '/authentication');
+        $client->request('POST', '/authentication');
 
-        self::assertEquals(200, $client->getResponse()->getStatusCode());
-        self::assertEquals(
-            '{"token":"eyJhbGciOiJTSEE1MTIifQ==.eyJ1c2VyIjoxMjMsImV4cGlyZXNfYXQiOiIyMDIxLTAzLTAxIDEyOjEwOjIwIn0=.9dd1f5d98753c955bab229eaa5c363bd36e5cc2988a6b537122bd9d6bddf589bd19deadd0981d41ab823ccef1c1a23e8e1923b998acb85e4b9104e7b37dd6acf","debug":{"login":null,"password":null}}',
-            $client->getResponse()->getContent()
-        );
+        self::assertEquals(403, $client->getResponse()->getStatusCode());
     }
 }
