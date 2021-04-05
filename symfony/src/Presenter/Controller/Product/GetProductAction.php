@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Presenter\Controller\Product;
 
+use App\Application\AuthenticationService;
+use App\Domain\WebToken;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,14 +12,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class GetProductAction
 {
-    private const TOKEN = 'eyJhbGciOiJTSEE1MTIifQ==.eyJ1c2VyIjoxMjMsImV4cGlyZXNfYXQiOjE2MTY2MDAwMDB9.956e8e557ed84f93f90a5865586d38010d8e22e974384f3d5fee0764e0bb6ba9c5ef86432bcf4d1d5c26e058d26aa42fc1e10de884a62bedaa6269c706877d36';
+    private $authenticationService;
+
+    public function __construct(AuthenticationService $authenticationService)
+    {
+        $this->authenticationService = $authenticationService;
+    }
 
     /**
      * @Route("/products", methods={"GET"})
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, WebToken $token): Response
     {
-        if ($request->get('token', '') === self::TOKEN) {
+        if ($this->authenticationService->isValid($token)) {
             return new JsonResponse(
                 [
                     'collection' => [
@@ -42,9 +49,10 @@ final class GetProductAction
                             'name' => 'Product 5'
                         ],
                     ],
-                    'meta' => [
+                    'metadata' => [
                         'total' => 5,
-                    ]
+                    ],
+                    'permissions' => [],
                 ],
                 200
             );

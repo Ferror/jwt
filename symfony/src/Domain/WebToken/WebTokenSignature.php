@@ -5,4 +5,10 @@ namespace App\Domain\WebToken;
 
 final class WebTokenSignature
 {
+    private $signature;
+
+    public function __construct(string $signature)
+    {
+        $this->signature = $signature;
+    }
 }
