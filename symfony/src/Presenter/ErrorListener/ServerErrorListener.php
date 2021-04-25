@@ -20,13 +20,13 @@ class ServerErrorListener
     {
         $exception = $event->getThrowable();
 
-//        if ($this->environment->isDevelopment()) {
-//            $event->setResponse(new ErrorResponse($exception->getMessage(), 500));
-//        }
-//
-//        if ($this->environment->isTesting()) {
-//            $event->setResponse(new ErrorResponse($exception->getMessage(), 500));
-//        }
+        if ($this->environment->isDevelopment()) {
+            $event->setResponse(new ErrorResponse($exception->getMessage(), 500));
+        }
+
+        if ($this->environment->isTesting()) {
+            $event->setResponse(new ErrorResponse($exception->getMessage(), 500));
+        }
 
         if ($this->environment->isProduction()) {
             $event->setResponse(new ErrorResponse('Unexpected error', 500));
