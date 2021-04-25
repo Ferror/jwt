@@ -8,6 +8,7 @@ use App\Domain\WebToken\WebTokenHeader;
 use App\Domain\WebToken\WebTokenSignature;
 use App\Framework\Environment;
 
+//Create WebToken and SignedWebToken decorator
 final class WebToken
 {
     private $header;
@@ -31,8 +32,9 @@ final class WebToken
         );
     }
 
-    public function isValid(Encoder $encoder, Environment $environment): bool
+    public function isValidSignature(Encoder $encoder, Environment $environment): bool
     {
+
         return $this->signature->compare(
             new WebTokenSignature(
                 \hash_hmac(

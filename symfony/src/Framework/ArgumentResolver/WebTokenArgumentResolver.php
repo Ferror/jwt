@@ -32,7 +32,7 @@ final class WebTokenArgumentResolver implements ArgumentValueResolverInterface
             throw WebTokenException::createInvalid('Empty token');
         }
 
-        $exploded = explode('.', $token);
+        $exploded = \explode('.', $token);
 
         if ($exploded === false || \count($exploded) !== 3) {
             throw WebTokenException::createInvalid('Invalid token');
