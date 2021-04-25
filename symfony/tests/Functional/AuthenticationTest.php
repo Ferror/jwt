@@ -19,6 +19,7 @@ final class AuthenticationTest extends WebTestCase
         self::assertEquals(self::TOKEN, json_decode($client->getResponse()->getContent(), true)['token']);
 
         $client->request('GET', '/products', [], [], ['HTTP_TOKEN' => self::TOKEN]);
+
         self::assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
