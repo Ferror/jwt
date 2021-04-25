@@ -14,8 +14,11 @@ final class WebTokenHeader implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return [
-            'alg' => $this->algorithm->toString()
-        ];
+        return ['alg' => $this->algorithm->toString()];
+    }
+
+    public function getAlgorithm(): Algorithm
+    {
+        return $this->algorithm;
     }
 }

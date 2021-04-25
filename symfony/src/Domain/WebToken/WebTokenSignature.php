@@ -11,4 +11,19 @@ final class WebTokenSignature
     {
         $this->signature = $signature;
     }
+
+    public function compare(self $signature): bool
+    {
+        return $this->signature === $signature->signature;
+    }
+
+    public function toString(): string
+    {
+        return $this->signature;
+    }
+
+    public function __toString(): string
+    {
+        return $this->toString();
+    }
 }

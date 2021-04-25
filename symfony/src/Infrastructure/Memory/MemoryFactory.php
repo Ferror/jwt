@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Memory;
 
+use App\Domain\Login;
 use App\Domain\PasswordHash;
 use App\Domain\User;
 
@@ -15,7 +16,7 @@ final class MemoryFactory
                 new User(
                     new User\UserIdentifier('id'),
                     new PasswordHash('$2y$10$5gIdNe3aQRFWW2VnFawdbejLdMkrjoBrmlMLXC9dEd8fX205bBhSy'), //password
-                    'login'
+                    new Login('login')
                 )
             ]
         );

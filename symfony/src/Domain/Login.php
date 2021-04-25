@@ -12,6 +12,11 @@ final class Login
         $this->login = $login;
     }
 
+    public function compare(self $self): bool
+    {
+        return $this->login === $self->login;
+    }
+
     public function toString(): string
     {
         return $this->login;

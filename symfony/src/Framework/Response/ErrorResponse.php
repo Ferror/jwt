@@ -9,6 +9,11 @@ final class ErrorResponse extends JsonResponse
 {
     public function __construct(string $message, int $status = 400)
     {
-        parent::__construct(['error' => ['message' => $message]], $status, [], false);
+        parent::__construct(
+            ['error' => ['message' => $message]],
+            $status,
+            ['Content-Type' => 'application/json'],
+            false
+        );
     }
 }

@@ -68,14 +68,20 @@
     "nette/utils": {
         "version": "v3.2.0"
     },
-    "nikic/php-parser": {
-        "version": "v4.10.4"
-    },
     "php-cs-fixer/diff": {
         "version": "v1.3.1"
     },
     "phpstan/phpdoc-parser": {
         "version": "0.4.9"
+    },
+    "phpstan/phpstan": {
+        "version": "0.12.84"
+    },
+    "phpstan/phpstan-phpunit": {
+        "version": "0.12.18"
+    },
+    "phpstan/phpstan-symfony": {
+        "version": "0.12.26"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -318,17 +324,11 @@
     "symplify/easy-testing": {
         "version": "9.0.19"
     },
-    "symplify/markdown-diff": {
-        "version": "9.0.19"
-    },
     "symplify/package-builder": {
         "version": "9.0.19"
     },
-    "symplify/php-config-printer": {
-        "version": "9.0.19"
-    },
-    "symplify/rule-doc-generator": {
-        "version": "9.0.19"
+    "symplify/rule-doc-generator-contracts": {
+        "version": "v9.2.19"
     },
     "symplify/set-config-resolver": {
         "version": "9.0.19"

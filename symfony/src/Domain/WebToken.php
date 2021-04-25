@@ -5,8 +5,8 @@ namespace App\Domain;
 
 use App\Application\Encoder;
 use App\Domain\WebToken\WebTokenHeader;
-use App\Domain\WebToken\WebTokenPayload;
 use App\Domain\WebToken\WebTokenSignature;
+use App\Framework\Environment;
 
 final class WebToken
 {
@@ -23,6 +23,24 @@ final class WebToken
 
     public function serialize(Encoder $encoder): string
     {
-        return \sprintf('%s.%s.%s', $encoder->encode($this->header), $encoder->encode($this->payload), $this->signature);
+        return \sprintf(
+            '%s.%s.%s',
+            $encoder->encode($this->header->jsonSerialize()),
+            $encoder->encode($this->payload->jsonSerialize()),
+            $this->signature->toString()
+        );
+    }
+
+    public function isValid(Encoder $encoder, Environment $environment): bool
+    {
+        return $this->signature->compare(
+            new WebTokenSignature(
+                \hash_hmac(
+                    $this->header->getAlgorithm()->toString(),
+                    \sprintf('%s%s', $encoder->encode($this->header), $encoder->encode($this->payload)),
+                    $environment->getApplicationSecret()
+                )
+            )
+        );
     }
 }

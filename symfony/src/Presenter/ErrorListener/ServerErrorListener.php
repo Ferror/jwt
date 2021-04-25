@@ -6,6 +6,7 @@ namespace App\Presenter\ErrorListener;
 use App\Framework\Environment;
 use App\Framework\Response\ErrorResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class ServerErrorListener
 {
@@ -19,6 +20,12 @@ class ServerErrorListener
     public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
+
+        if ($exception instanceof MethodNotAllowedHttpException) {
+            $event->setResponse(new ErrorResponse($exception->getMessage(), 405));
+
+            return;
+        }
 
         if ($this->environment->isDevelopment()) {
             $event->setResponse(new ErrorResponse($exception->getMessage(), 500));

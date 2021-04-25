@@ -18,6 +18,6 @@ final class DecoderTest extends TestCase
 
     public function testItDecodes(): void
     {
-        self::assertEquals(null, $this->decoder->decode("data"));
+        self::assertEquals(null, $this->decoder->decode('data'));
     }
 }

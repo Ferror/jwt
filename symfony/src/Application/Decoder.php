@@ -5,5 +5,5 @@ namespace App\Application;
 
 interface Decoder
 {
-    public function decode($data);
+    public function decode(string $data);
 }

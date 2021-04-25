@@ -18,4 +18,9 @@ final class MemoryClock implements Clock
     {
         return $this->time;
     }
+
+    public function addTime(int $time): Clock
+    {
+        return new MemoryClock($this->time + $time);
+    }
 }
