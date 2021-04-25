@@ -44,6 +44,6 @@ final class WebTokenAction extends AbstractController
             return new JsonResponse(['token' => $token->serialize($this->encoder)], 200);
         }
 
-        return new ErrorResponse('Invalid Credentials', 403);
+        return new ErrorResponse('Invalid Credentials', 400);
     }
 }
