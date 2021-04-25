@@ -17,4 +17,28 @@ final class WebTokenActionTest extends WebTestCase
         self::assertEquals(200, $client->getResponse()->getStatusCode());
         self::assertEquals(self::TOKEN, (string) \json_decode((string) $client->getResponse()->getContent(), true)['token']);
     }
+
+    public function testItCannotCreateWebToken(): void
+    {
+        $client = self::createClient();
+        $client->request('POST', '/authentication', [], [], [], '{"login":"not-exist","password":"password"}');
+
+        self::assertEquals(400, $client->getResponse()->getStatusCode());
+
+        $client->request('POST', '/authentication', [], [], [], '{"login":"login","password":"not-exist"}');
+
+        self::assertEquals(400, $client->getResponse()->getStatusCode());
+
+        $client->request('POST', '/authentication', [], [], [], '');
+
+        self::assertEquals(400, $client->getResponse()->getStatusCode());
+
+        $client->request('POST', '/authentication', [], [], [], '{-asd');
+
+        self::assertEquals(400, $client->getResponse()->getStatusCode());
+
+        $client->request('GET', '/authentication', [], [], [], '');
+
+        self::assertEquals(405, $client->getResponse()->getStatusCode());
+    }
 }
