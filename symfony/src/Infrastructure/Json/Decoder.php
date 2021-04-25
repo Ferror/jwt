@@ -14,7 +14,7 @@ final class Decoder implements DecoderDecorator
         $this->decoder = $decoder;
     }
 
-    public function decode($data)
+    public function decode(string $data)
     {
         return json_decode($this->decoder->decode($data), true);
     }

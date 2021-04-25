@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Application;
 
-interface Decoder
+final class Result
 {
-    public function decode(string $data);
 }

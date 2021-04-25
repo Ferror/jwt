@@ -15,6 +15,6 @@ final class WebTokenActionTest extends WebTestCase
         $client->request('POST', '/authentication', [], [], [], '{"login":"login","password":"password"}');
 
         self::assertEquals(200, $client->getResponse()->getStatusCode());
-        self::assertEquals(self::TOKEN, json_decode($client->getResponse()->getContent(), true)['token']);
+        self::assertEquals(self::TOKEN, (string) \json_decode((string) $client->getResponse()->getContent(), true)['token']);
     }
 }

@@ -5,7 +5,6 @@ namespace App\Domain;
 
 use App\Application\Encoder;
 use App\Domain\WebToken\WebTokenHeader;
-use App\Domain\WebToken\WebTokenPayload;
 use App\Domain\WebToken\WebTokenSignature;
 
 final class WebToken

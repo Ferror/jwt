@@ -7,7 +7,7 @@ use App\Application\Decoder;
 
 final class MemoryDecoder implements Decoder
 {
-    public function decode($data)
+    public function decode(string $data)
     {
         return $data;
     }
