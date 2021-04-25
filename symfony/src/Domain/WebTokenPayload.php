@@ -21,9 +21,11 @@ final class WebTokenPayload implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'user' => [
+                'identifier' => $this->userIdentifier->toString(),
+            ],
             'created_at' => $this->createdAt,
             'expires_at' => $this->expiresAt,
-            'user_id' => $this->userIdentifier->toString(),
         ];
     }
 }

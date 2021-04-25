@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Memory;
 
+use App\Domain\Login;
 use App\Domain\User;
+use App\Domain\User\UserException;
 use App\Domain\User\UserStorage;
 
 final class MemoryUserStorage implements UserStorage
@@ -19,16 +21,16 @@ final class MemoryUserStorage implements UserStorage
     }
 
     /**
-     * @throws User\UserException
+     * @throws UserException
      */
     public function get(string $login): User
     {
         $result = \array_filter($this->memory, static function (User $user) use ($login) {
-            return $user->getLogin() === $login;
+            return $user->getLogin()->compare(new Login($login));
         });
 
         if (empty($result)) {
-            throw User\UserException::createNotFound($login);
+            throw UserException::createNotFound($login);
         }
 
         return $result[0];

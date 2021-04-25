@@ -57,4 +57,11 @@ return static function(ContainerConfigurator $configurator) {
 
     $services
         ->set(\App\Application\WebTokenEncoder::class);
+
+    $services
+        ->set(\App\Domain\WebToken\Algorithm::class)
+        ->factory([\App\Domain\WebToken\Algorithm::class, 'sha512']);
+
+    $services
+        ->set(\App\Domain\WebTokenFactory::class);
 };

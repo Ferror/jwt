@@ -11,7 +11,7 @@ final class User
     private $hash;
     private $login;
 
-    public function __construct(UserIdentifier $identifier, PasswordHash $hash, string $login)
+    public function __construct(UserIdentifier $identifier, PasswordHash $hash, Login $login)
     {
         $this->identifier = $identifier;
         $this->hash = $hash;
@@ -23,8 +23,13 @@ final class User
         return \password_verify($password->toString(), $this->hash->toString());
     }
 
-    public function getLogin(): string
+    public function getLogin(): Login
     {
         return $this->login;
+    }
+
+    public function getIdentifier(): UserIdentifier
+    {
+        return $this->identifier;
     }
 }

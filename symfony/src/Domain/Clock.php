@@ -6,4 +6,5 @@ namespace App\Domain;
 interface Clock
 {
     public function getTime(): int;
+    public function addTime(int $time): Clock;
 }

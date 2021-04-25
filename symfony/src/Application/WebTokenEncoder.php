@@ -7,7 +7,7 @@ use App\Infrastructure\Base64\Encoder as Base64Encoder;
 use App\Infrastructure\Json\Encoder as JsonEncoder;
 use App\Infrastructure\Memory\MemoryEncoder;
 
-final class WebTokenEncoder
+final class WebTokenEncoder implements Encoder
 {
     private $encoder;
 
@@ -16,7 +16,7 @@ final class WebTokenEncoder
         $this->encoder = new JsonEncoder(new Base64Encoder(new MemoryEncoder()));
     }
 
-    public function encode(array $data)
+    public function encode($data)
     {
         return $this->encoder->encode($data);
     }
