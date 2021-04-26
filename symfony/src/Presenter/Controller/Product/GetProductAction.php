@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace App\Presenter\Controller\Product;
 
 use App\Application\AuthenticationService;
-use App\Domain\WebToken;
+use App\Domain\SignedWebToken;
+use App\Framework\Response\ErrorResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,7 @@ final class GetProductAction
     /**
      * @Route("/products", methods={"GET"})
      */
-    public function __invoke(Request $request, WebToken $token): Response
+    public function __invoke(Request $request, SignedWebToken $token): Response
     {
         if ($this->authenticationService->isValid($token)) {
             return new JsonResponse(
@@ -58,6 +59,6 @@ final class GetProductAction
             );
         }
 
-        return new JsonResponse(['error' => ['message' => 'Authentication required']], 403);
+        return new ErrorResponse('Authentication required', 403);
     }
 }

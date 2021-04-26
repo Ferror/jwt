@@ -9,11 +9,15 @@ final class Algorithm
 
     public static function sha512(): self
     {
-        return new self('SHA512');
+        return new self('sha512');
     }
 
     public function __construct(string $name)
     {
+        if (!\in_array($name, \hash_hmac_algos(), true)) {
+            throw new \InvalidArgumentException("$name is not valid hash algorithm");
+        }
+
         $this->name = $name;
     }
 

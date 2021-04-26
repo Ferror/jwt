@@ -30,8 +30,8 @@ return static function(ContainerConfigurator $configurator) {
         ->args(['%env(APP_ENV)%', '%env(APP_SECRET)%']);
 
     $services
-        ->set(\App\Domain\WebToken\WebTokenStorage::class)
-        ->class(\App\Infrastructure\Memory\MemoryWebTokenStorage::class);
+        ->set(\App\Domain\SignedWebTokenStorage::class)
+        ->class(\App\Infrastructure\Memory\MemorySignedWebTokenStorage::class);
 
     $services
         ->set(\App\Domain\User\UserStorage::class)
@@ -47,7 +47,7 @@ return static function(ContainerConfigurator $configurator) {
         ->set(\App\Presenter\Console\CreateWebTokenCommand::class);
 
     $services
-        ->set(\App\Framework\ArgumentResolver\WebTokenArgumentResolver::class);
+        ->set(\App\Framework\ArgumentResolver\SignedWebTokenArgumentResolver::class);
 
     $services
         ->set(\App\Framework\ArgumentResolver\CredentialsArgumentResolver::class);
@@ -64,4 +64,7 @@ return static function(ContainerConfigurator $configurator) {
 
     $services
         ->set(\App\Domain\WebTokenFactory::class);
+
+    $services
+        ->set(\App\Domain\SignedWebTokenFactory::class);
 };

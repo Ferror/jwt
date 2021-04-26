@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Application;
 
-use App\Domain\WebToken;
-use App\Domain\WebToken\WebTokenStorage;
+use App\Domain\SignedWebToken;
+use App\Domain\SignedWebTokenStorage;
 use App\Framework\Environment;
 
 final class AuthenticationService
@@ -13,16 +13,16 @@ final class AuthenticationService
     private $environment;
     private $encoder;
 
-    public function __construct(WebTokenStorage $storage, Environment $environment, WebTokenEncoder $encoder)
+    public function __construct(SignedWebTokenStorage $storage, Environment $environment, WebTokenEncoder $encoder)
     {
         $this->storage = $storage;
         $this->environment = $environment;
         $this->encoder = $encoder;
     }
 
-    public function isValid(WebToken $token): bool
+    public function isValid(SignedWebToken $token): bool
     {
-        $user = $this->storage->getUser($token);
+//        $user = $this->storage->getUser($token);
 
         //check token signature
         return $token->isValidSignature($this->encoder, $this->environment);

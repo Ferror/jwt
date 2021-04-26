@@ -9,4 +9,9 @@ final class WebTokenException extends \Exception
     {
         return new self("Invalid Web Token: $message");
     }
+
+    public static function createNotFound(string $message): self
+    {
+        return new self("Token not found: $message");
+    }
 }

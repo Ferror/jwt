@@ -18,6 +18,9 @@ final class CredentialsArgumentResolver implements ArgumentValueResolverInterfac
         return $argument->getType() === Credentials::class;
     }
 
+    /**
+     * @throws \App\Domain\CredentialsException
+     */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
         $body = $request->getContent(false);
