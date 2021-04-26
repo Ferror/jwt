@@ -36,4 +36,9 @@ final class SignedWebToken
     {
         return $this->token->sign($encoder, $environment)->signature->equals($this->signature);
     }
+
+    public function isExpired(Clock $time): bool
+    {
+        return $this->token->isExpired($time);
+    }
 }
