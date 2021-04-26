@@ -6,6 +6,8 @@ jobs:
           - cd symfony
           - composer install
           - make ci
+          after_success:
+          - bash <(curl -s https://codecov.io/bash)
         - language: node_js
           node_js: 10
           script:

@@ -41,4 +41,10 @@ final class WebToken
             )
         );
     }
+
+    public function isExpired(Clock $time): bool
+    {
+        return $this->payload->getExpireAt() <= $time->getTime();
+
+    }
 }

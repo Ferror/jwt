@@ -28,4 +28,9 @@ final class WebTokenPayload implements \JsonSerializable
             'expires_at' => $this->expiresAt,
         ];
     }
+
+    public function getExpireAt(): int
+    {
+        return $this->expiresAt;
+    }
 }
