@@ -1,7 +1,7 @@
 ci:
 	composer validate
 	vendor/bin/ecs check
-	bin/phpunit tests
+	bin/phpunit tests --coverage-clover=coverage.xml
 	#vendor/bin/phpstan analyze -c phpstan.neon
 run:
 	composer install --no-interaction --prefer-dist
