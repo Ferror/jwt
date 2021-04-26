@@ -5,8 +5,8 @@ namespace App\Presenter\Controller;
 
 use App\Application\WebTokenEncoder;
 use App\Domain\Credentials;
+use App\Domain\SignedWebTokenFactory;
 use App\Domain\User\UserStorage;
-use App\Domain\WebTokenFactory;
 use App\Framework\Response\ErrorResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,7 +23,7 @@ final class WebTokenAction extends AbstractController
     private $encoder;
     private $factory;
 
-    public function __construct(UserStorage $userStorage, WebTokenEncoder $encoder, WebTokenFactory $factory)
+    public function __construct(UserStorage $userStorage, WebTokenEncoder $encoder, SignedWebTokenFactory $factory)
     {
         $this->userStorage = $userStorage;
         $this->encoder = $encoder;

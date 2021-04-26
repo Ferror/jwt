@@ -12,7 +12,7 @@ final class Login
         $this->login = $login;
     }
 
-    public function compare(self $self): bool
+    public function equals(self $self): bool
     {
         return $this->login === $self->login;
     }

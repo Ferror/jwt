@@ -23,16 +23,16 @@ final class CreateWebTokenCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        $header = ['alg' => 'SHA512'];
-        $payload = [
-            'user' => [
-                'identifier' => 123,
-            ],
-            'created_at' => $this->clock->getTime(),
-            'expires_at' => $this->clock->getTime(),
-        ];
-        $signature = hash_hmac($header['alg'], json_encode($header) . json_encode($payload), 'secret');
-        $output->writeln($this->encode($header) . '.' . $this->encode($payload) . '.' . $signature,);
+//        $header = ['alg' => 'SHA512'];
+//        $payload = [
+//            'user' => [
+//                'identifier' => 123,
+//            ],
+//            'created_at' => $this->clock->getTime(),
+//            'expires_at' => $this->clock->getTime(),
+//        ];
+//        $signature = hash_hmac($header['alg'], json_encode($header) . json_encode($payload), 'secret');
+//        $output->writeln($this->encode($header) . '.' . $this->encode($payload) . '.' . $signature,);
 
         return Command::SUCCESS;
     }

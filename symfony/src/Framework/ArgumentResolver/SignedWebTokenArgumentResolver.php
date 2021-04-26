@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Framework\ArgumentResolver;
 
+use App\Domain\SignedWebToken;
 use App\Domain\User\UserIdentifier;
 use App\Domain\WebToken;
 use App\Domain\WebToken\Algorithm;
@@ -14,11 +15,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
-final class WebTokenArgumentResolver implements ArgumentValueResolverInterface
+final class SignedWebTokenArgumentResolver implements ArgumentValueResolverInterface
 {
     public function supports(Request $request, ArgumentMetadata $argument): bool
     {
-        return $argument->getType() === WebToken::class;
+        return $argument->getType() === SignedWebToken::class;
     }
 
     /**
@@ -49,12 +50,14 @@ final class WebTokenArgumentResolver implements ArgumentValueResolverInterface
         $jsonPayload = \json_decode($basePayload, true);
 
         //VALIDATE STRUCTURE OF JSON PAYLOAD
-        yield new WebToken(
-            new WebTokenHeader(new Algorithm($jsonHeader['alg'])),
-            new WebTokenPayload(
-                $jsonPayload['created_at'],
-                $jsonPayload['expires_at'],
-                new UserIdentifier($jsonPayload['user']['identifier'])
+        yield new SignedWebToken(
+            new WebToken(
+                new WebTokenHeader(new Algorithm($jsonHeader['alg'])),
+                new WebTokenPayload(
+                    $jsonPayload['created_at'],
+                    $jsonPayload['expires_at'],
+                    new UserIdentifier($jsonPayload['user']['identifier'])
+                )
             ),
             new WebTokenSignature($signature)
         );

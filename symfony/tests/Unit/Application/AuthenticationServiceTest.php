@@ -5,11 +5,15 @@ namespace App\Unit\Application;
 
 use App\Application\AuthenticationService;
 use App\Application\WebTokenEncoder;
+use App\Domain\SignedWebToken;
 use App\Domain\User\UserIdentifier;
 use App\Domain\WebToken;
+use App\Domain\WebToken\Algorithm;
+use App\Domain\WebToken\WebTokenHeader;
+use App\Domain\WebToken\WebTokenSignature;
 use App\Domain\WebTokenPayload;
 use App\Framework\Environment;
-use App\Infrastructure\Memory\MemoryWebTokenStorage;
+use App\Infrastructure\Memory\MemorySignedWebTokenStorage;
 use PHPUnit\Framework\TestCase;
 
 final class AuthenticationServiceTest extends TestCase
@@ -19,7 +23,7 @@ final class AuthenticationServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->service = new AuthenticationService(
-            new MemoryWebTokenStorage(),
+            new MemorySignedWebTokenStorage(),
             new Environment('test', 'secret'),
             new WebTokenEncoder()
         );
@@ -27,10 +31,12 @@ final class AuthenticationServiceTest extends TestCase
 
     public function testIsValid(): void
     {
-        $token = new WebToken(
-            new WebToken\WebTokenHeader(new WebToken\Algorithm('SHA512')),
-            new WebTokenPayload(1616500000, 1616503600, new UserIdentifier('id')),
-            new WebToken\WebTokenSignature('08355ab23b8cccb9f395b9ccfe76337ecb4be9b5fffd95041da5ed2063186c142aa4f22d2896041ed75ad67378ba41bb8683094997b973ba4e1474708d111b13')
+        $token = new SignedWebToken(
+            new WebToken(
+                new WebTokenHeader(Algorithm::sha512()),
+                new WebTokenPayload(1616500000, 1616503600, new UserIdentifier('id'))
+            ),
+            new WebTokenSignature('b5add06f94999f91e545620594781fa31f7d13f251beeb49c91f89584fff02236d96a0e18789eec109eb57df3531edfab9d4920971c2aeaa2ab0eb705749b9ad')
         );
 
         self::assertTrue($this->service->isValid($token));

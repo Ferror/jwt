@@ -26,7 +26,7 @@ final class MemoryUserStorage implements UserStorage
     public function get(string $login): User
     {
         $result = \array_filter($this->memory, static function (User $user) use ($login) {
-            return $user->getLogin()->compare(new Login($login));
+            return $user->getLogin()->equals(new Login($login));
         });
 
         if (empty($result)) {

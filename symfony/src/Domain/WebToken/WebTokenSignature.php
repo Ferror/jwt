@@ -12,7 +12,7 @@ final class WebTokenSignature
         $this->signature = $signature;
     }
 
-    public function compare(self $signature): bool
+    public function equals(self $signature): bool
     {
         return $this->signature === $signature->signature;
     }
