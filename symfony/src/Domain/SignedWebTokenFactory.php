@@ -34,15 +34,6 @@ final class SignedWebTokenFactory
             )
         );
 
-        return new SignedWebToken(
-            $token,
-            new WebToken\WebTokenSignature(
-                \hash_hmac(
-                    $this->algorithm->toString(),
-                    $token->serialize($this->encoder),
-                    $this->environment->getApplicationSecret()
-                )
-            )
-        );
+        return $token->sign($this->encoder, $this->environment);
     }
 }

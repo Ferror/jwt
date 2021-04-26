@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Domain;
 
 use App\Application\Encoder;
-use App\Domain\WebToken\Algorithm;
 use App\Domain\WebToken\WebTokenSignature;
 use App\Framework\Environment;
 
@@ -35,14 +34,6 @@ final class SignedWebToken
 
     public function isValidSignature(Encoder $encoder, Environment $environment): bool
     {
-        return $this->signature->equals(
-            new WebTokenSignature(
-                \hash_hmac(
-                    Algorithm::sha512()->toString(),
-                    $this->token->serialize($encoder),
-                    $environment->getApplicationSecret()
-                )
-            )
-        );
+        return $this->token->sign($encoder, $environment)->signature->equals($this->signature);
     }
 }
