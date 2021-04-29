@@ -1,7 +1,7 @@
 controllers:
-    resource: ../../src/Presenter/Controller/
+    resource: ../../src/Authentication/Presenter/Controller/
     type: annotation
 
 kernel:
-    resource: ../../src/Kernel.php
+    resource: ../../src/Authentication/Framework/Kernel.php
     type: annotation

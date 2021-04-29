@@ -8,14 +8,14 @@ return static function(ContainerConfigurator $configurator) {
         ->autoconfigure();
 
     $services
-        ->set(\App\Domain\Clock::class)
-        ->class(\App\Infrastructure\Memory\MemoryClock::class)
+        ->set(\Ferror\Authentication\Domain\Clock::class)
+        ->class(\Ferror\Authentication\Infrastructure\Memory\MemoryClock::class)
         ->args([1616500000]);
 
     $services
-        ->set(\App\Infrastructure\Memory\MemoryFactory::class);
+        ->set(\Ferror\Authentication\Infrastructure\Memory\MemoryFactory::class);
 
     $services
-        ->set(\App\Domain\User\UserStorage::class)
-        ->factory([service(\App\Infrastructure\Memory\MemoryFactory::class), 'createUserStorage']);
+        ->set(\Ferror\Authentication\Domain\User\UserStorage::class)
+        ->factory([service(\Ferror\Authentication\Infrastructure\Memory\MemoryFactory::class), 'createUserStorage']);
 };

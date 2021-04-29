@@ -8,63 +8,63 @@ return static function(ContainerConfigurator $configurator) {
         ->autoconfigure();
 
     $services
-        ->set(\App\Domain\Clock::class)
-        ->class(\App\Infrastructure\Memory\MemoryClock::class)
+        ->set(\Ferror\Authentication\Domain\Clock::class)
+        ->class(\Ferror\Authentication\Infrastructure\Memory\MemoryClock::class)
         ->args([1616500000]);
 
     $services
-        ->load('App\\Presenter\\Controller\\', '../src/Presenter/Controller/')
+        ->load('Ferror\\Authentication\\Presenter\\Controller\\', '%kernel.project_dir%'.'src/Authentication/Presenter/Controller/')
         ->tag('controller.service_arguments');
 
     $services
-        ->set(\App\Presenter\ErrorListener\ServerErrorListener::class)
+        ->set(\Ferror\Authentication\Presenter\ErrorListener\ServerErrorListener::class)
         ->tag('kernel.event_listener', ['event' => 'kernel.exception', 'priority' => 0]);
 
     $services
-        ->set(\App\Presenter\ErrorListener\AuthenticationErrorListener::class)
+        ->set(\Ferror\Authentication\Presenter\ErrorListener\AuthenticationErrorListener::class)
         ->tag('kernel.event_listener', ['event' => 'kernel.exception', 'priority' => 1]);
 
     $services
-        ->set(\App\Framework\Environment::class)
-        ->class(\App\Framework\Environment::class)
+        ->set(\Ferror\Authentication\Framework\Environment::class)
+        ->class(\Ferror\Authentication\Framework\Environment::class)
         ->args(['%env(APP_ENV)%', '%env(APP_SECRET)%']);
 
     $services
-        ->set(\App\Domain\SignedWebTokenStorage::class)
-        ->class(\App\Infrastructure\Memory\MemorySignedWebTokenStorage::class);
+        ->set(\Ferror\Authentication\Domain\SignedWebTokenStorage::class)
+        ->class(\Ferror\Authentication\Infrastructure\Memory\MemorySignedWebTokenStorage::class);
 
     $services
-        ->set(\App\Domain\User\UserStorage::class)
-        ->class(\App\Infrastructure\Memory\MemoryUserStorage::class);
+        ->set(\Ferror\Authentication\Domain\User\UserStorage::class)
+        ->class(\Ferror\Authentication\Infrastructure\Memory\MemoryUserStorage::class);
 
     $services
-        ->set(\App\Application\PasswordEncoder::class);
+        ->set(\Ferror\Authentication\Application\PasswordEncoder::class);
 
     $services
-        ->set(\App\Presenter\Console\CreatePasswordHashCommand::class);
+        ->set(\Ferror\Authentication\Presenter\Console\CreatePasswordHashCommand::class);
 
     $services
-        ->set(\App\Presenter\Console\CreateWebTokenCommand::class);
+        ->set(\Ferror\Authentication\Presenter\Console\CreateWebTokenCommand::class);
 
     $services
-        ->set(\App\Framework\ArgumentResolver\SignedWebTokenArgumentResolver::class);
+        ->set(\Ferror\Authentication\Framework\ArgumentResolver\SignedWebTokenArgumentResolver::class);
 
     $services
-        ->set(\App\Framework\ArgumentResolver\CredentialsArgumentResolver::class);
+        ->set(\Ferror\Authentication\Framework\ArgumentResolver\CredentialsArgumentResolver::class);
 
     $services
-        ->set(\App\Application\AuthenticationService::class);
+        ->set(\Ferror\Authentication\Application\AuthenticationService::class);
 
     $services
-        ->set(\App\Application\WebTokenEncoder::class);
+        ->set(\Ferror\Authentication\Application\WebTokenEncoder::class);
 
     $services
-        ->set(\App\Domain\WebToken\Algorithm::class)
-        ->factory([\App\Domain\WebToken\Algorithm::class, 'sha512']);
+        ->set(\Ferror\Authentication\Domain\WebToken\Algorithm::class)
+        ->factory([\Ferror\Authentication\Domain\WebToken\Algorithm::class, 'sha512']);
 
     $services
-        ->set(\App\Domain\WebTokenFactory::class);
+        ->set(\Ferror\Authentication\Domain\WebTokenFactory::class);
 
     $services
-        ->set(\App\Domain\SignedWebTokenFactory::class);
+        ->set(\Ferror\Authentication\Domain\SignedWebTokenFactory::class);
 };
