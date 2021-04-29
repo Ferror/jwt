@@ -6,6 +6,7 @@ namespace Ferror\Authentication\Application;
 use Ferror\Authentication\Domain\Clock;
 use Ferror\Authentication\Domain\SignedWebToken;
 use Ferror\Authentication\Domain\SignedWebTokenStorage;
+use Ferror\Authentication\Domain\WebToken\WebTokenException;
 use Ferror\Authentication\Framework\Environment;
 
 final class AuthenticationService
@@ -29,16 +30,14 @@ final class AuthenticationService
 
     public function isValid(SignedWebToken $token): bool
     {
-//        $user = $this->storage->getUser($token);
+        try {
+            $this->storage->getUser($token);
+        } catch (WebTokenException $e) {
+            return false;
+        }
 
-        //check token signature
+        //check token signature & if is expired
         return $token->isValidSignature($this->encoder, $this->environment)
             && !$token->isExpired($this->clock);
-
-//        if ($jsonPayload['expires_at'] < $clock->getTime()) {
-//            return new Response('Token expired', 400);
-//        }
-
-        //check if token is expired
     }
 }

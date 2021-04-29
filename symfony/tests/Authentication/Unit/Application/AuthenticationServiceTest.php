@@ -24,7 +24,15 @@ final class AuthenticationServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->service = new AuthenticationService(
-            new MemorySignedWebTokenStorage(),
+            new MemorySignedWebTokenStorage([
+                new SignedWebToken(
+                    new WebToken(
+                        new WebTokenHeader(Algorithm::sha512()),
+                        new WebTokenPayload(1616500000, 1616503600, new UserIdentifier('id'))
+                    ),
+                    new WebTokenSignature('b5add06f94999f91e545620594781fa31f7d13f251beeb49c91f89584fff02236d96a0e18789eec109eb57df3531edfab9d4920971c2aeaa2ab0eb705749b9ad')
+                )
+            ]),
             new Environment('test', 'secret'),
             new WebTokenEncoder(),
             new MemoryClock(1616500000)

@@ -13,7 +13,7 @@ return static function(ContainerConfigurator $configurator) {
         ->args([1616500000]);
 
     $services
-        ->load('Ferror\\Authentication\\Presenter\\Controller\\', '%kernel.project_dir%'.'src/Authentication/Presenter/Controller/')
+        ->load('Ferror\\Authentication\\Presenter\\Controller\\', '%kernel.project_dir%'.'/src/Authentication/Presenter/Controller/')
         ->tag('controller.service_arguments');
 
     $services

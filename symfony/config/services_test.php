@@ -16,6 +16,10 @@ return static function(ContainerConfigurator $configurator) {
         ->set(\Ferror\Authentication\Infrastructure\Memory\MemoryFactory::class);
 
     $services
+        ->set(\Ferror\Authentication\Domain\SignedWebTokenStorage::class)
+        ->factory([service(\Ferror\Authentication\Infrastructure\Memory\MemoryFactory::class), 'createSignedWebTokenStorage']);
+
+    $services
         ->set(\Ferror\Authentication\Domain\User\UserStorage::class)
         ->factory([service(\Ferror\Authentication\Infrastructure\Memory\MemoryFactory::class), 'createUserStorage']);
 };
